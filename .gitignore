@@ -1,0 +1,23 @@
+# MATLAB の自動保存など
+*.asv
+*.autosave
+slprj/
+
+# 実行時に生成・取得するもの
+assets/
+data/
+
+# 解析・検証・テストの出力
+validation/work/
+validation/*_log.txt
+examples/michibiki_out/
+tests/*.png
+tests/*.txt
+tests/*.mat
+tests/*.glb
+
+# 開発中の試行スクリプト
+tests/tryAscent.m
+tests/tryLunar.m
+tests/debugDop.m
+tests/benchPropagation.m
