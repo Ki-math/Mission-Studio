@@ -3,6 +3,41 @@
 MATLAB上で動くSTK風のミッション解析GUI。Aerospace Toolbox / Satellite Communications Toolbox の
 `satelliteScenario` を解析エンジンとして使用します (R2024b で確認)。
 
+## 必要な環境
+
+### MATLAB と Toolbox
+MATLAB R2024b で確認しています。
+
+| 製品 | 用途 |
+|---|---|
+| MATLAB R2024b | 本体、GUI |
+| Aerospace Toolbox | `satelliteScenario`、数値軌道伝播、座標変換、天体暦の読み出し、月の重力場 |
+| Satellite Communications Toolbox | 回線解析 (送受信機・リンク)、ITU-R P.618 の伝搬損失。Communications Toolbox、DSP System Toolbox、Signal Processing Toolbox が前提 |
+| Optimization Toolbox | 月遷移軌道のターゲティング (`lsqnonlin`) |
+
+上の構成より少ない Toolbox で動くかどうかは確認していません。
+
+### 追加でインストールするもの
+Toolbox を入れただけでは足りず、次のデータを別途入れる必要があります。
+
+| 追加物 | 入れ方 | 必要になる機能 | 無い場合 |
+|---|---|---|---|
+| **Ephemeris Data for Aerospace Toolbox** (アドオン) | MATLAB で `aeroDataPackage` を実行し、アドオンエクスプローラーで「インストール」。MathWorks アカウントへのサインインが必要 | 月・太陽の引力、太陽輻射圧、食 (Eclipse タブ)、月遷移 (Lunar タブ)、月による掩蔽 | Eclipse タブは案内を表示して空になる。Force Model で月・太陽や輻射圧を有効にした場合と、月遷移を有効にした場合はエラー |
+| **ITU-R デジタルマップ** (データファイル、約 70 MB) | https://www.mathworks.com/supportfiles/spc/P618/ITURDigitalMaps.tar.gz をダウンロードし、`data/ITURDigitalMaps` に展開 (`maps.mat`、`p836.mat`、`p837.mat`、`p840.mat`) | 回線解析の大気損失 (降雨・大気ガス・雲・シンチレーション) | 晴天時のみ計算し、図の題にその旨を表示 |
+
+インストールの確認:
+```matlab
+exist("ephConstants405.mat", "file") == 2    % 天体暦データ: true なら導入済み
+mstudio.hasItuMaps()                         % ITU-R マップ: true なら利用可能
+```
+
+どちらもこのリポジトリには含めていません (`data/` は `.gitignore` の対象)。
+
+### 検証スクリプトを動かす場合のみ
+| 追加物 | 入れ方 | 用途 |
+|---|---|---|
+| **NASA GMAT R2025a** | SourceForge の GMAT プロジェクトから `gmat-win-R2025a.zip` を取得して展開。場所は `C:\Work\GMAT\GMAT_R2025a`、または環境変数 `GMAT_ROOT` で指定 | `validation/` の比較スクリプト (`compareWithGmat` など)。アプリの実行には不要 |
+
 ## 起動
 ```matlab
 cd C:\Work\MissionStudio
