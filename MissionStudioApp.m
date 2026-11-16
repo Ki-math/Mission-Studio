@@ -1,5 +1,5 @@
 classdef MissionStudioApp < handle
-    %MISSIONSTUDIOAPP  STK風のミッション解析GUI (衛星・飛行経路ビークル・地上局)
+    %MISSIONSTUDIOAPP  宇宙ミッション解析GUI (衛星・ロケット・月探査機・地上局)
     %   app = MissionStudioApp() は既定シナリオでアプリを起動します。
     %   app = MissionStudioApp(spec) は指定したシナリオ定義で起動します。
     %

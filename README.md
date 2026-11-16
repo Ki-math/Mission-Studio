@@ -1,7 +1,7 @@
 # Mission Studio
 
-MATLAB上で動くSTK風のミッション解析GUI。Aerospace Toolbox / Satellite Communications Toolbox の
-`satelliteScenario` を解析エンジンとして使用します (R2024b で確認)。
+MATLAB上で動く宇宙ミッション解析環境です。衛星・ロケット・月探査を、GUI とスクリプトの両方から解析できます。
+Aerospace Toolbox / Satellite Communications Toolbox の `satelliteScenario` を解析エンジンとして使用します (R2024b で確認)。
 
 ## 必要な環境
 
